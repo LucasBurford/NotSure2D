@@ -20,6 +20,7 @@ public class XPOrb : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
+            FindObjectOfType<Player>().GiveXP();
             Destroy(gameObject);
         }
     }

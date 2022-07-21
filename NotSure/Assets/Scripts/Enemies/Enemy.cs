@@ -1,20 +1,26 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Pathfinding;
 
 public class Enemy : MonoBehaviour
 {
-    public GameObject xpOrb;
+    public Player player;
+    public AIPath ai;
+    public Animator animator;
 
     public float maxHealth;
     public float currentHealth;
+    public float damage;
+    public float aggroDistance;
 
     public bool isDead;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        player = FindObjectOfType<Player>();
+        ai = GetComponent<AIPath>();
     }
 
     // Update is called once per frame
@@ -22,11 +28,22 @@ public class Enemy : MonoBehaviour
     {
         if (!isDead)
         {
+            CheckDistance();
+
             if (currentHealth <= 0)
             {
                 isDead = true;
                 Die();
             }
+        }
+    }
+
+    private void CheckDistance()
+    {
+        if (Vector2.Distance(transform.position, player.transform.position) <= aggroDistance)
+        {
+            ai.canMove = true;
+            ai.destination = player.transform.position;
         }
     }
 
