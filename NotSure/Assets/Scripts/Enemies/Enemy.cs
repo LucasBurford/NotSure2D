@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
+    public GameObject xpOrb;
+
     public float maxHealth;
     public float currentHealth;
 
@@ -30,6 +32,10 @@ public class Enemy : MonoBehaviour
 
     public void Die()
     {
+        for (int i = 0; i <= Random.Range(0, 4); i++)
+        {
+            Instantiate(Resources.Load("XPOrb"), transform.position, Quaternion.identity);
+        }
         Destroy(gameObject);
     }
 
