@@ -111,6 +111,8 @@ public class PlayerMovement : MonoBehaviour
             // Call one of three attack animations "Attack1", "Attack2", "Attack3"
             m_animator.SetTrigger("Attack" + m_currentAttack);
 
+            FindObjectOfType<PlayerAttacks>().Attack(m_currentAttack);
+
             // Reset timer
             m_timeSinceAttack = 0.0f;
         }
